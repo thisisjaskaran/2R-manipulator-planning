@@ -76,6 +76,7 @@ def main():
     plt.title("theta_1 vs theta_2 plot")
     plt.xlabel("theta_1 (in radians)")
     plt.ylabel("theta_2 (in radians)")
+    plt.savefig("theta_plot.png")
     plt.show()
 
 if __name__=="__main__":
