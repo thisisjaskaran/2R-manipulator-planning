@@ -5,6 +5,7 @@ from manipulator import Manipulator
 from grid import Grid
 from planner import Planner
 from math import floor
+import matplotlib.pyplot as plt
 
 f = open("config.json")
 data = json.load(f)
@@ -40,7 +41,7 @@ def main():
     # goal = [ee_start[0] - 100, ee_start[1]]
     plan = planner.plan(goal)
 
-    for control_output in plan:
+    for i, control_output in enumerate(plan):
         
         manipulator_dynamic = Manipulator(l1, control_output[0], l2, control_output[1], pivot_x, pivot_y)
 
@@ -56,9 +57,26 @@ def main():
         cv.arrowedLine(dynamic_grid.grid, (cols // 2, rows // 2), (cols // 2 + 30, rows // 2), (0,0,255), 4)
         cv.imshow("results/state", dynamic_grid.grid)
         cv.waitKey(1)
+
+        if(i == 0):
+            cv.imwrite("results/start_pos.png", dynamic_grid.grid)
+        cv.imwrite("results/end_pos.png", dynamic_grid.grid)
     
     cv.waitKey(0)
     cv.destroyAllWindows()
+
+    theta_1s = []
+    theta_2s = []
+
+    for i in range(len(plan)):
+        theta_1s.append(plan[i][0])
+        theta_2s.append(plan[i][1])
+    
+    plt.plot(theta_1s, theta_2s)
+    plt.title("theta_1 vs theta_2 plot")
+    plt.xlabel("theta_1 (in radians)")
+    plt.ylabel("theta_2 (in radians)")
+    plt.show()
 
 if __name__=="__main__":
     main()
