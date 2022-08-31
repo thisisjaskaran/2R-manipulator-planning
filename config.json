@@ -1,0 +1,15 @@
+{
+    "rows": 576,
+    "columns": 1024,
+    "obstacle_code": 0,
+    "obstacle_thickness": 7,
+    "pivot_x": 0,
+    "pivot_y": 0,
+    "l1": 200,
+    "theta_1": 45,
+    "l2": 100,
+    "theta_2": 45,
+    "manipulator_thickness": 10,
+    "control_dim": 1000,
+    "control_scaling": 80
+}
